@@ -36,62 +36,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (introScreen && protectButton) {
 
-
-        /*
-        The website starts blurred behind the intro.
-        The button stays clickable.
-        */
-
         document.body.classList.add(
             "intro-active"
         );
 
 
-        /* -----------------------------------------------
-           PROTECT THE SHIELD BUTTON
-        ------------------------------------------------ */
-
         protectButton.addEventListener(
             "click",
             () => {
-
-
-                /*
-                Prevent multiple clicks
-                */
 
                 if (
                     introScreen.classList.contains(
                         "intro-exit"
                     )
                 ) {
-
                     return;
-
                 }
 
-
-                /*
-                Button press effect
-                */
 
                 protectButton.classList.add(
                     "protect-clicked"
                 );
 
 
-                /*
-                Start black fade animation
-                */
-
                 introScreen.classList.add(
                     "intro-exit"
                 );
 
-
-                /*
-                Reveal main website
-                */
 
                 document.body.classList.remove(
                     "intro-active"
@@ -102,10 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
 
-                /*
-                Remove intro completely
-                */
-
                 setTimeout(() => {
 
                     introScreen.classList.add(
@@ -113,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
                 }, 1500);
-
 
             }
         );
@@ -133,9 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ) {
 
 
-        /* -----------------------------------------------
-           OPEN GUIDE
-        ------------------------------------------------ */
+        /* OPEN GUIDE */
 
         guideButton.addEventListener(
             "click",
@@ -153,9 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /* -----------------------------------------------
-           CLOSE GUIDE BUTTON
-        ------------------------------------------------ */
+        /* CLOSE GUIDE */
 
         closeGuide.addEventListener(
             "click",
@@ -173,9 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /* -----------------------------------------------
-           CLOSE WHEN CLICKING OUTSIDE
-        ------------------------------------------------ */
+        /* CLOSE OUTSIDE */
 
         guideModal.addEventListener(
             "click",
@@ -199,14 +159,11 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /* -----------------------------------------------
-           BUTTON RIPPLE
-        ------------------------------------------------ */
+        /* GUIDE BUTTON RIPPLE */
 
         guideButton.addEventListener(
             "click",
             function (event) {
-
 
                 const ripple =
                     document.createElement(
@@ -263,25 +220,19 @@ document.addEventListener("DOMContentLoaded", () => {
                             opacity: 0
                         }
                     ],
-
                     {
                         duration: 700,
-
-                        easing:
-                            "ease-out"
+                        easing: "ease-out"
                     }
                 );
 
 
                 setTimeout(
                     () => {
-
                         ripple.remove();
-
                     },
                     700
                 );
-
 
             }
         );
@@ -297,7 +248,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener(
         "keydown",
         (event) => {
-
 
             if (
                 event.key === "Escape" &&
@@ -317,7 +267,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
 
-
         }
     );
 
@@ -329,29 +278,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (canvas) {
 
-
         const ctx =
             canvas.getContext("2d");
 
-
         let particles = [];
 
-
         let mouse = {
-
             x: null,
-
             y: null,
-
             radius: 130
-
         };
 
 
-
-        /* -----------------------------------------------
-           RESIZE CANVAS
-        ------------------------------------------------ */
+        /* RESIZE */
 
         function resizeCanvas() {
 
@@ -361,27 +300,20 @@ document.addEventListener("DOMContentLoaded", () => {
             canvas.height =
                 window.innerHeight;
 
-
             createParticles();
 
         }
 
 
-
-        /* -----------------------------------------------
-           CREATE PARTICLES
-        ------------------------------------------------ */
+        /* CREATE PARTICLES */
 
         function createParticles() {
 
-
             particles = [];
-
 
             const particleCount =
                 Math.min(
                     100,
-
                     Math.floor(
                         window.innerWidth / 12
                     )
@@ -390,67 +322,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
             for (
                 let i = 0;
-
                 i < particleCount;
-
                 i++
             ) {
-
 
                 particles.push({
 
                     x:
-
                         Math.random()
                         * canvas.width,
 
-
                     y:
-
                         Math.random()
                         * canvas.height,
 
-
                     size:
-
                         Math.random()
                         * 1.8 + 0.4,
 
-
                     speedX:
-
                         (
                             Math.random() - 0.5
                         )
                         * 0.25,
-
 
                     speedY:
-
                         (
                             Math.random() - 0.5
                         )
                         * 0.25,
 
-
                     opacity:
-
                         Math.random()
                         * 0.6 + 0.1
 
                 });
 
-
             }
-
 
         }
 
 
-
-        /* -----------------------------------------------
-           INITIALIZE
-        ------------------------------------------------ */
+        /* INITIALIZE */
 
         resizeCanvas();
 
@@ -461,10 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-
-        /* -----------------------------------------------
-           MOUSE TRACKING
-        ------------------------------------------------ */
+        /* MOUSE */
 
         window.addEventListener(
             "mousemove",
@@ -485,37 +395,26 @@ document.addEventListener("DOMContentLoaded", () => {
             () => {
 
                 mouse.x = null;
-
                 mouse.y = null;
 
             }
         );
 
 
-
-        /* -----------------------------------------------
-           DRAW PARTICLES
-        ------------------------------------------------ */
+        /* DRAW */
 
         function drawParticles() {
 
-
             ctx.clearRect(
-
                 0,
-
                 0,
-
                 canvas.width,
-
                 canvas.height
-
             );
 
 
             particles.forEach(
                 (particle) => {
-
 
                     particle.x +=
                         particle.speedX;
@@ -524,15 +423,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         particle.speedY;
 
 
-
-                    /* Screen boundaries */
+                    /* SCREEN BOUNDARIES */
 
                     if (
-
                         particle.x < 0 ||
-
                         particle.x > canvas.width
-
                     ) {
 
                         particle.speedX *= -1;
@@ -541,11 +436,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                     if (
-
                         particle.y < 0 ||
-
                         particle.y > canvas.height
-
                     ) {
 
                         particle.speedY *= -1;
@@ -553,62 +445,44 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
 
-
-                    /* Mouse interaction */
+                    /* MOUSE INTERACTION */
 
                     if (
-
                         mouse.x !== null &&
-
                         mouse.y !== null
-
                     ) {
-
 
                         const dx =
                             particle.x - mouse.x;
 
-
                         const dy =
                             particle.y - mouse.y;
 
-
                         const distance =
                             Math.sqrt(
-
                                 dx * dx +
-
                                 dy * dy
-
                             );
 
 
                         if (
-
                             distance < mouse.radius
-
                         ) {
 
-
                             const force =
-
                                 (
                                     mouse.radius -
                                     distance
                                 )
-
                                 / mouse.radius;
 
 
                             particle.x +=
-
                                 dx *
                                 force *
                                 0.015;
 
-
                             particle.y +=
-
                                 dy *
                                 force *
                                 0.015;
@@ -618,29 +492,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
 
-
-                    /* Draw particle */
+                    /* DRAW PARTICLE */
 
                     ctx.beginPath();
 
-
                     ctx.arc(
-
                         particle.x,
-
                         particle.y,
-
                         particle.size,
-
                         0,
-
                         Math.PI * 2
-
                     );
 
-
                     ctx.fillStyle =
-
                         `rgba(
                             80,
                             175,
@@ -648,9 +512,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             ${particle.opacity}
                         )`;
 
-
                     ctx.fill();
-
 
                 }
             );
@@ -660,12 +522,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 drawParticles
             );
 
-
         }
 
 
         drawParticles();
-
 
     }
 
@@ -683,43 +543,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (heroVisual) {
 
-
         window.addEventListener(
             "mousemove",
             (event) => {
 
-
                 const x =
-
                     (
                         event.clientX /
                         window.innerWidth
-
                         - 0.5
-                    )
-
-                    * 12;
+                    ) * 12;
 
 
                 const y =
-
                     (
                         event.clientY /
                         window.innerHeight
-
                         - 0.5
-                    )
-
-                    * 12;
+                    ) * 12;
 
 
                 heroVisual.style.transform =
-
                     `translate(
                         ${x}px,
                         ${y}px
                     )`;
-
 
             }
         );
@@ -734,7 +582,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
         );
-
 
     }
 
@@ -803,91 +650,445 @@ document.addEventListener("DOMContentLoaded", () => {
         "keydown",
         (event) => {
 
-
             const key =
                 event.key.toLowerCase();
 
 
             if (
-
                 (
                     event.ctrlKey ||
                     event.metaKey
                 )
-
                 &&
-
                 (
-
                     key === "c" ||
-
                     key === "x" ||
-
                     key === "u" ||
-
                     key === "s"
-
                 )
-
             ) {
 
                 event.preventDefault();
 
             }
 
-
         }
     );
 
 
-});
 
-/* =========================================================
-   CREATIVE SHIELD FLOOD EXPERIENCE
-========================================================= */
+    /* =====================================================
+       SHIELD NAVIGATOR
+    ===================================================== */
+
+    const trigger =
+        document.getElementById(
+            "snTrigger"
+        );
+
+    const modal =
+        document.getElementById(
+            "snModal"
+        );
+
+    const close =
+        document.getElementById(
+            "snClose"
+        );
+
+    const backdrop =
+        document.getElementById(
+            "snBackdrop"
+        );
+
+    const nameInput =
+        document.getElementById(
+            "snName"
+        );
+
+    const status =
+        document.getElementById(
+            "snStatus"
+        );
+
+    const edition =
+        document.getElementById(
+            "snEdition"
+        );
 
 
-/* =========================================================
-   LIVE FLOOD STATUS SYSTEM
-========================================================= */
+    /* -----------------------------------------------------
+       SAFETY CHECK
+    ----------------------------------------------------- */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+    if (
+        trigger &&
+        modal &&
+        close &&
+        backdrop &&
+        nameInput &&
+        status &&
+        edition
+    ) {
 
-        const rainBar =
-            document.getElementById(
-                "rainBar"
+
+        /* -------------------------------------------------
+           PDF FILES
+        ------------------------------------------------- */
+
+        const pdfFiles = [
+
+            "PDFs/001%20SHIELD.pdf",
+
+            "PDFs/002%20NAGALAND.pdf",
+
+            "PDFs/003%20SIVASAGAR.pdf"
+
+        ];
+
+
+        /* -------------------------------------------------
+           OPEN NAVIGATOR
+        ------------------------------------------------- */
+
+        function openNavigator() {
+
+            modal.classList.add(
+                "sn-open"
             );
 
-        const riverBar =
-            document.getElementById(
-                "riverBar"
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
             );
 
+            document.body.classList.add(
+                "sn-modal-open"
+            );
 
-        if (rainBar) {
 
             setTimeout(
                 () => {
-
-                    rainBar.style.width =
-                        "68%";
-
+                    nameInput.focus();
                 },
-                500
+                180
             );
 
         }
 
 
-        if (riverBar) {
+        /* -------------------------------------------------
+           CLOSE NAVIGATOR
+        ------------------------------------------------- */
+
+        function closeNavigator() {
+
+            modal.classList.remove(
+                "sn-open"
+            );
+
+            modal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            document.body.classList.remove(
+                "sn-modal-open"
+            );
+
+        }
+
+
+        /* OPEN */
+
+        trigger.addEventListener(
+            "click",
+            openNavigator
+        );
+
+
+        /* CLOSE */
+
+        close.addEventListener(
+            "click",
+            closeNavigator
+        );
+
+
+        backdrop.addEventListener(
+            "click",
+            closeNavigator
+        );
+
+
+        /* ESCAPE */
+
+        document.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (
+                    event.key === "Escape" &&
+                    modal.classList.contains(
+                        "sn-open"
+                    )
+                ) {
+
+                    closeNavigator();
+
+                }
+
+            }
+        );
+
+
+        /* -------------------------------------------------
+           NAME VALIDATION
+        ------------------------------------------------- */
+
+        nameInput.addEventListener(
+            "input",
+            () => {
+
+                const name =
+                    nameInput.value.trim();
+
+                const eligible =
+                    name.length >= 2;
+
+
+                edition.disabled =
+                    !eligible;
+
+
+                edition.classList.toggle(
+                    "sn-eligible",
+                    eligible
+                );
+
+
+                status.classList.toggle(
+                    "sn-ready",
+                    eligible
+                );
+
+
+                status.textContent =
+                    eligible
+                        ? "NAME VERIFIED • ACCESS ELIGIBLE"
+                        : "ENTER YOUR NAME TO CONTINUE";
+
+            }
+        );
+
+
+        /* -------------------------------------------------
+           DOWNLOAD ONE PDF
+        ------------------------------------------------- */
+
+        function downloadPDF(
+            file
+        ) {
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+
+            link.href =
+                file;
+
+
+            link.download =
+                decodeURIComponent(
+                    file.substring(
+                        file.lastIndexOf("/") + 1
+                    )
+                );
+
+
+            link.style.display =
+                "none";
+
+
+            document.body.appendChild(
+                link
+            );
+
+
+            link.click();
+
+
+            document.body.removeChild(
+                link
+            );
+
+        }
+
+
+        /* -------------------------------------------------
+           GET THE EDITION
+           
+           IMPORTANT:
+           This does NOT:
+           - open the PDF
+           - navigate to the PDF
+           - open a PDF viewer
+           - close the website
+           - use window.open()
+           - use location.href
+           
+           It ONLY starts downloads.
+        ------------------------------------------------- */
+
+        edition.addEventListener(
+            "click",
+            (event) => {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+
+                if (edition.disabled) {
+                    return;
+                }
+
+
+                const name =
+                    nameInput.value.trim();
+
+
+                if (!name) {
+                    return;
+                }
+
+
+                /* STATUS */
+
+                status.textContent =
+                    "DOWNLOADING 3 PDF GUIDES...";
+
+
+                /* PREVENT REPEATED CLICK */
+
+                edition.disabled =
+                    true;
+
+
+                /*
+                 * Download all 3 files.
+                 *
+                 * Small delay between each download
+                 * helps browsers process separate files.
+                 */
+
+                pdfFiles.forEach(
+                    (
+                        file,
+                        index
+                    ) => {
+
+                        setTimeout(
+                            () => {
+
+                                downloadPDF(
+                                    file
+                                );
+
+                            },
+                            index * 900
+                        );
+
+                    }
+                );
+
+
+                /* FINISHED MESSAGE */
+
+                setTimeout(
+                    () => {
+
+                        status.textContent =
+                            "3 PDF GUIDES SENT TO YOUR DOWNLOADS";
+
+
+                        edition.disabled =
+                            false;
+
+
+                    },
+                    3500
+                );
+
+            }
+        );
+
+
+        /* -------------------------------------------------
+           NAVIGATOR RIPPLE
+        ------------------------------------------------- */
+
+        function createButtonRipple(
+            button,
+            event
+        ) {
+
+            const rect =
+                button.getBoundingClientRect();
+
+
+            const ripple =
+                document.createElement(
+                    "span"
+                );
+
+
+            ripple.className =
+                "button-ripple";
+
+
+            ripple.style.left =
+                `${event.clientX - rect.left}px`;
+
+
+            ripple.style.top =
+                `${event.clientY - rect.top}px`;
+
+
+            button.appendChild(
+                ripple
+            );
+
+
+            ripple.animate(
+                [
+                    {
+                        transform:
+                            "translate(-50%, -50%) scale(1)",
+
+                        opacity: 0.65
+                    },
+
+                    {
+                        transform:
+                            "translate(-50%, -50%) scale(35)",
+
+                        opacity: 0
+                    }
+                ],
+                {
+                    duration: 700,
+                    easing: "ease-out"
+                }
+            );
+
 
             setTimeout(
                 () => {
 
-                    riverBar.style.width =
-                        "54%";
+                    ripple.remove();
 
                 },
                 700
@@ -895,430 +1096,548 @@ document.addEventListener(
 
         }
 
-    }
-);
 
+        /* -------------------------------------------------
+           GLASS BUTTON RIPPLE
+        ------------------------------------------------- */
 
-/* =========================================================
-   RANDOM LIVE MONITORING DATA
-========================================================= */
-
-const rainLevel =
-    document.getElementById(
-        "rainLevel"
-    );
-
-const riverLevel =
-    document.getElementById(
-        "riverLevel"
-    );
-
-const riskLevel =
-    document.getElementById(
-        "riskLevel"
-    );
-
-const rainBarLive =
-    document.getElementById(
-        "rainBar"
-    );
-
-const riverBarLive =
-    document.getElementById(
-        "riverBar"
-    );
-
-
-function updateFloodStatus() {
-
-    if (
-        !rainLevel ||
-        !riverLevel ||
-        !riskLevel
-    ) {
-
-        return;
-
-    }
-
-
-    const rain =
-        Math.floor(
-            Math.random() * 25
-        ) + 60;
-
-
-    const river =
-        Math.floor(
-            Math.random() * 30
-        ) + 45;
-
-
-    rainLevel.textContent =
-        rain + "%";
-
-
-    riverLevel.textContent =
-        river + "%";
-
-
-    if (rainBarLive) {
-
-        rainBarLive.style.width =
-            rain + "%";
-
-    }
-
-
-    if (riverBarLive) {
-
-        riverBarLive.style.width =
-            river + "%";
-
-    }
-
-
-    if (
-        river > 70 ||
-        rain > 80
-    ) {
-
-        riskLevel.textContent =
-            "HIGH ALERT";
-
-    }
-
-    else if (
-        river > 55
-    ) {
-
-        riskLevel.textContent =
-            "MONITORING";
-
-    }
-
-    else {
-
-        riskLevel.textContent =
-            "STABLE";
-
-    }
-
-}
-
-
-/* Update every 8 seconds */
-
-setInterval(
-    updateFloodStatus,
-    8000
-);
-
-
-/* =========================================================
-   SHIELD PROTECTION MODE
-========================================================= */
-
-const activateShield =
-    document.getElementById(
-        "activateShield"
-    );
-
-const activateText =
-    document.getElementById(
-        "activateText"
-    );
-
-const protectionText =
-    document.getElementById(
-        "protectionText"
-    );
-
-const shieldProtection =
-    document.querySelector(
-        ".shield-protection"
-    );
-
-
-if (activateShield) {
-
-    activateShield.addEventListener(
-        "click",
-        () => {
-
-
-            shieldProtection.classList.add(
-                "shield-active"
+        const actionButtons =
+            document.querySelectorAll(
+                ".action-buttons .glass-button"
             );
 
 
-            activateText.textContent =
-                "SHIELD MODE ACTIVATED";
+        actionButtons.forEach(
+            (button) => {
 
+                button.addEventListener(
+                    "click",
+                    (event) => {
 
-            protectionText.textContent =
-                "SHIELD protection protocol is active. Stay aware, follow safety instructions and prepare before floodwater rises.";
-
-
-            activateShield.disabled =
-                true;
-
-
-            setTimeout(
-                () => {
-
-                    shieldProtection.classList.remove(
-                        "shield-active"
-                    );
-
-
-                    activateText.textContent =
-                        "SHIELD PROTECTION ACTIVE";
-
-                },
-                1800
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   SCROLL REVEAL SYSTEM
-========================================================= */
-
-const revealElements =
-    document.querySelectorAll(
-        ".reveal-section, .reveal-card"
-    );
-
-
-const revealObserver =
-    new IntersectionObserver(
-
-        (entries) => {
-
-            entries.forEach(
-                (entry) => {
-
-                    if (
-                        entry.isIntersecting
-                    ) {
-
-                        entry.target.classList.add(
-                            "revealed"
+                        createButtonRipple(
+                            button,
+                            event
                         );
-
-
-                        revealObserver.unobserve(
-                            entry.target
-                        );
-
-                    }
-
-                }
-            );
-
-        },
-
-        {
-
-            threshold: 0.12
-
-        }
-
-    );
-
-
-revealElements.forEach(
-    (element) => {
-
-        revealObserver.observe(
-            element
-        );
-
-    }
-);
-
-
-/* =========================================================
-   INTERACTIVE FLOATING ELEMENTS
-========================================================= */
-
-const floatingElements =
-    document.querySelectorAll(
-        ".floating-element"
-    );
-
-
-window.addEventListener(
-    "mousemove",
-    (event) => {
-
-        floatingElements.forEach(
-            (element) => {
-
-                const rect =
-                    element.getBoundingClientRect();
-
-
-                const centerX =
-                    rect.left +
-                    rect.width / 2;
-
-
-                const centerY =
-                    rect.top +
-                    rect.height / 2;
-
-
-                const distanceX =
-                    event.clientX -
-                    centerX;
-
-
-                const distanceY =
-                    event.clientY -
-                    centerY;
-
-
-                const distance =
-                    Math.sqrt(
-
-                        distanceX *
-                        distanceX +
-
-                        distanceY *
-                        distanceY
-
-                    );
-
-
-                if (
-                    distance < 180
-                ) {
-
-                    const force =
-                        (
-                            180 -
-                            distance
-                        ) / 180;
-
-
-                    const moveX =
-                        distanceX *
-                        force *
-                        0.12;
-
-
-                    const moveY =
-                        distanceY *
-                        force *
-                        0.12;
-
-
-                    element.style.transform =
-                        `translate(
-                            ${moveX}px,
-                            ${moveY}px
-                        ) scale(1.08)`;
-
-
-                    element.style.boxShadow =
-                        `0 0 40px
-                        rgba(0,140,255,0.45)`;
-
-                }
-
-                else {
-
-                    element.style.transform =
-                        "";
-
-
-                    element.style.boxShadow =
-                        "";
-
-                }
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================================================
-   WATER PARALLAX EFFECT
-========================================================= */
-
-const waterScene =
-    document.querySelector(
-        ".water-scene"
-    );
-
-
-if (waterScene) {
-
-    window.addEventListener(
-        "mousemove",
-        (event) => {
-
-            const rect =
-                waterScene.getBoundingClientRect();
-
-
-            const mouseX =
-                event.clientX -
-                rect.left;
-
-
-            if (
-                mouseX >= 0 &&
-                mouseX <= rect.width
-            ) {
-
-                const percentage =
-                    mouseX /
-                    rect.width;
-
-
-                const waves =
-                    waterScene.querySelectorAll(
-                        ".water-wave"
-                    );
-
-
-                waves.forEach(
-                    (
-                        wave,
-                        index
-                    ) => {
-
-                        const movement =
-                            (
-                                percentage -
-                                0.5
-                            )
-                            *
-                            (
-                                index + 1
-                            )
-                            *
-                            15;
-
-
-                        wave.style.marginLeft =
-                            `${movement}px`;
 
                     }
                 );
 
             }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       LIVE FLOOD STATUS
+    ===================================================== */
+
+    const rainBar =
+        document.getElementById(
+            "rainBar"
+        );
+
+    const riverBar =
+        document.getElementById(
+            "riverBar"
+        );
+
+
+    if (rainBar) {
+
+        setTimeout(
+            () => {
+
+                rainBar.style.width =
+                    "68%";
+
+            },
+            500
+        );
+
+    }
+
+
+    if (riverBar) {
+
+        setTimeout(
+            () => {
+
+                riverBar.style.width =
+                    "54%";
+
+            },
+            700
+        );
+
+    }
+
+
+
+    /* =====================================================
+       FLOOD MONITORING
+    ===================================================== */
+
+    const rainLevel =
+        document.getElementById(
+            "rainLevel"
+        );
+
+    const riverLevel =
+        document.getElementById(
+            "riverLevel"
+        );
+
+    const riskLevel =
+        document.getElementById(
+            "riskLevel"
+        );
+
+    const rainBarLive =
+        document.getElementById(
+            "rainBar"
+        );
+
+    const riverBarLive =
+        document.getElementById(
+            "riverBar"
+        );
+
+
+    function updateFloodStatus() {
+
+        if (
+            !rainLevel ||
+            !riverLevel ||
+            !riskLevel
+        ) {
+
+            return;
+
+        }
+
+
+        const rain =
+            Math.floor(
+                Math.random() * 25
+            ) + 60;
+
+
+        const river =
+            Math.floor(
+                Math.random() * 30
+            ) + 45;
+
+
+        rainLevel.textContent =
+            rain + "%";
+
+
+        riverLevel.textContent =
+            river + "%";
+
+
+        if (rainBarLive) {
+
+            rainBarLive.style.width =
+                rain + "%";
+
+        }
+
+
+        if (riverBarLive) {
+
+            riverBarLive.style.width =
+                river + "%";
+
+        }
+
+
+        if (
+            river > 70 ||
+            rain > 80
+        ) {
+
+            riskLevel.textContent =
+                "HIGH ALERT";
+
+        }
+
+        else if (
+            river > 55
+        ) {
+
+            riskLevel.textContent =
+                "MONITORING";
+
+        }
+
+        else {
+
+            riskLevel.textContent =
+                "STABLE";
+
+        }
+
+    }
+
+
+    updateFloodStatus();
+
+
+    setInterval(
+        updateFloodStatus,
+        8000
+    );
+
+
+
+    /* =====================================================
+       SHIELD PROTECTION MODE
+    ===================================================== */
+
+    const activateShield =
+        document.getElementById(
+            "activateShield"
+        );
+
+    const activateText =
+        document.getElementById(
+            "activateText"
+        );
+
+    const protectionText =
+        document.getElementById(
+            "protectionText"
+        );
+
+    const shieldProtection =
+        document.querySelector(
+            ".shield-protection"
+        );
+
+
+    if (
+        activateShield &&
+        shieldProtection &&
+        activateText &&
+        protectionText
+    ) {
+
+        activateShield.addEventListener(
+            "click",
+            () => {
+
+                shieldProtection.classList.add(
+                    "shield-active"
+                );
+
+
+                activateText.textContent =
+                    "SHIELD MODE ACTIVATED";
+
+
+                protectionText.textContent =
+                    "SHIELD protection protocol is active. Stay aware, follow safety instructions and prepare before floodwater rises.";
+
+
+                activateShield.disabled =
+                    true;
+
+
+                setTimeout(
+                    () => {
+
+                        shieldProtection.classList.remove(
+                            "shield-active"
+                        );
+
+
+                        activateText.textContent =
+                            "SHIELD PROTECTION ACTIVE";
+
+                    },
+                    1800
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ===================================================== */
+
+    const revealElements =
+        document.querySelectorAll(
+            ".reveal-section, .reveal-card"
+        );
+
+
+    if (
+        "IntersectionObserver" in window
+    ) {
+
+        const revealObserver =
+            new IntersectionObserver(
+
+                (entries) => {
+
+                    entries.forEach(
+                        (entry) => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target.classList.add(
+                                    "revealed"
+                                );
+
+
+                                revealObserver.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+                    threshold: 0.12
+                }
+
+            );
+
+
+        revealElements.forEach(
+            (element) => {
+
+                revealObserver.observe(
+                    element
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       INTERACTIVE FLOATING ELEMENTS
+    ===================================================== */
+
+    const floatingElements =
+        document.querySelectorAll(
+            ".floating-element"
+        );
+
+
+    window.addEventListener(
+        "mousemove",
+        (event) => {
+
+            floatingElements.forEach(
+                (element) => {
+
+                    const rect =
+                        element.getBoundingClientRect();
+
+
+                    const centerX =
+                        rect.left +
+                        rect.width / 2;
+
+
+                    const centerY =
+                        rect.top +
+                        rect.height / 2;
+
+
+                    const distanceX =
+                        event.clientX -
+                        centerX;
+
+
+                    const distanceY =
+                        event.clientY -
+                        centerY;
+
+
+                    const distance =
+                        Math.sqrt(
+                            distanceX *
+                            distanceX +
+                            distanceY *
+                            distanceY
+                        );
+
+
+                    if (
+                        distance < 180
+                    ) {
+
+                        const force =
+                            (
+                                180 -
+                                distance
+                            ) / 180;
+
+
+                        const moveX =
+                            distanceX *
+                            force *
+                            0.12;
+
+
+                        const moveY =
+                            distanceY *
+                            force *
+                            0.12;
+
+
+                        element.style.transform =
+                            `translate(
+                                ${moveX}px,
+                                ${moveY}px
+                            ) scale(1.08)`;
+
+
+                        element.style.boxShadow =
+                            `0 0 40px
+                            rgba(0,140,255,0.45)`;
+
+                    }
+
+                    else {
+
+                        element.style.transform =
+                            "";
+
+                        element.style.boxShadow =
+                            "";
+
+                    }
+
+                }
+            );
 
         }
     );
 
-}
+
+
+    /* =====================================================
+       WATER PARALLAX
+    ===================================================== */
+
+    const waterScene =
+        document.querySelector(
+            ".water-scene"
+        );
+
+
+    if (waterScene) {
+
+        window.addEventListener(
+            "mousemove",
+            (event) => {
+
+                const rect =
+                    waterScene.getBoundingClientRect();
+
+
+                const mouseX =
+                    event.clientX -
+                    rect.left;
+
+
+                if (
+                    mouseX >= 0 &&
+                    mouseX <= rect.width
+                ) {
+
+                    const percentage =
+                        mouseX /
+                        rect.width;
+
+
+                    const waves =
+                        waterScene.querySelectorAll(
+                            ".water-wave"
+                        );
+
+
+                    waves.forEach(
+                        (
+                            wave,
+                            index
+                        ) => {
+
+                            const movement =
+                                (
+                                    percentage -
+                                    0.5
+                                )
+                                *
+                                (
+                                    index + 1
+                                )
+                                *
+                                15;
+
+
+                            wave.style.marginLeft =
+                                `${movement}px`;
+
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       HOME PAGE OPEN / REFRESH COUNTER
+    ===================================================== */
+
+    const STORAGE_KEY =
+        "shield_home_open_count";
+
+
+    let count =
+        Number(
+            localStorage.getItem(
+                STORAGE_KEY
+            )
+        ) || 0;
+
+
+    count++;
+
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        count
+    );
+
+
+    console.log(
+        "SHIELD Home Page Opens:",
+        count
+    );
+
+});
