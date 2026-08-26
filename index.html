@@ -2,17 +2,15 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SHIELD 🛡️ | Flood Awareness Project</title>
 
     <meta
         name="description"
-        content="SHIELD — A Class 10 exhibition project exploring how floods happen in Assam, their effects, and ways to prevent or reduce their impact."
+        content="SHIELD – A Class 10 exhibition project exploring how floods happen in Assam."
     >
 
     <meta
@@ -20,10 +18,7 @@
         content="#000000"
     >
 
-    <title>SHIELD 🛡️ | Flood Awareness Project</title>
-
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 
@@ -234,6 +229,10 @@
 
                 </h1>
 
+                <div class="shield-full-form">
+    SUSTAINABLE HAZARDS INFRASTRUCTURE AND ENVIRONMENTAL LAND DEFENCE
+</div>
+
 
 
                 <h2>
@@ -283,38 +282,47 @@
 
 
 
-                <!-- HOW TO MAKE BUTTON -->
+               <!-- HOW TO MAKE + SHIELD NAVIGATOR -->
 
-                <button
-                    id="guideButton"
-                    class="glass-button"
-                    type="button"
-                    aria-label="Open How To Make guide"
-                >
+<!-- HOW TO MAKE + SHIELD NAVIGATOR -->
+<div class="action-buttons">
 
+    <!-- HOW TO MAKE BUTTON -->
+    <button
+        id="guideButton"
+        class="glass-button"
+        type="button"
+        aria-label="Open How To Make guide"
+    >
+        <span class="button-text">
+            HOW TO MAKE
+        </span>
 
-                    <span class="button-icon">
-
-                        ✦
-
-                    </span>
-
-
-                    <span class="button-text">
-
-                        HOW TO MAKE
-
-                    </span>
+        <span class="arrow">
+            →
+        </span>
+    </button>
 
 
-                    <span class="arrow">
+    <!-- SHIELD NAVIGATOR BUTTON -->
+    <button
+        id="snTrigger"
+        class="glass-button sn-trigger"
+        type="button"
+        aria-label="Open SHIELD Navigator"
+    >
+        <span class="button-icon" aria-hidden="true"></span>
 
-                        →
+        <span class="button-text">
+            SHIELD NAVIGATOR
+        </span>
 
-                    </span>
+        <span class="arrow">
+            →
+        </span>
+    </button>
 
-
-                </button>
+</div>
 
 
 
@@ -1243,6 +1251,91 @@
 
     </div>
 
+
+
+
+    <!-- =====================================================
+         SHIELD NAVIGATOR MODAL
+    ====================================================== -->
+    <div
+        id="snModal"
+        class="sn-modal"
+        aria-hidden="true"
+    >
+        <div
+            class="sn-backdrop"
+            id="snBackdrop"
+        ></div>
+
+        <section
+            class="sn-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="snTitle"
+        >
+            <button
+                type="button"
+                id="snClose"
+                class="sn-close"
+                aria-label="Close SHIELD Navigator"
+            >
+                ×
+            </button>
+
+            <div class="sn-kicker">
+                SHIELD • DIGITAL EDITION
+            </div>
+
+            <h2 id="snTitle">
+                SHIELD NAVIGATOR
+            </h2>
+
+            <p class="sn-description">
+                Welcome to the SHIELD project guide. Enter your name
+                to unlock the demo edition and explore how the project
+                was created, how floods happen, and how their impact
+                can be prevented or reduced.
+            </p>
+
+            <label
+                class="sn-label"
+                for="snName"
+            >
+                PLEASE ENTER YOUR NAME
+            </label>
+
+            <input
+                id="snName"
+                class="sn-input"
+                type="text"
+                maxlength="50"
+                autocomplete="name"
+                placeholder="Enter your name"
+            >
+
+            <div
+                id="snStatus"
+                class="sn-status"
+                aria-live="polite"
+            >
+                ENTER YOUR NAME TO CONTINUE
+            </div>
+
+            <button
+                id="snEdition"
+                class="sn-edition"
+                type="button"
+                disabled
+            >
+                <span>GET THE EDITION</span>
+                <span class="sn-edition-arrow">→</span>
+            </button>
+
+            <div class="sn-demo">
+                DEMO ACCESS • SHIELD NAVIGATOR
+            </div>
+        </section>
+    </div>
 
 
     <!-- =====================================================
