@@ -1641,3 +1641,403 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
+
+
+/* =========================================================
+   SHIELD HOW IT WAS MADE
+   A-B-C-D INTERACTIVE NAVIGATION
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const guideModal = document.getElementById("guideModal");
+
+    if (!guideModal) return;
+
+    const steps = guideModal.querySelectorAll(".progress-container .step");
+    const cards = guideModal.querySelectorAll(".guide-content .guide-card");
+
+    if (!steps.length || !cards.length) return;
+
+
+    /* =====================================================
+       CONTENT FOR A B C D
+       ===================================================== */
+
+    const shieldSections = [
+
+        /* =================================================
+           A — MODEL CONSTRUCTION
+           ================================================= */
+
+        {
+            label: "STEP 01 • MODEL CONSTRUCTION",
+            title: "HOW WE BUILT THE SHIELD MODEL",
+
+            text:
+                "The main SHIELD exhibition model was created as a physical landscape to show how rainwater moves through mountains, land and drainage areas. We first prepared a strong plywood base and then built the landform using thermocol. Cement was applied over the shaped areas to make the mountains stronger and give them a realistic surface. After the structure dried, colour and spray paint were used to create the final landscape appearance.",
+
+            materials: [
+                ["BASE", "Plywood was used as the main base so that the complete model remained stable."],
+                ["MOUNTAINS", "Thermocol was shaped to form the mountains and raised land."],
+                ["CEMENT", "Cement was added over the mountain structure to strengthen and texture the surface."],
+                ["COLOUR", "Paint and spray colour were used to give the mountains and land a realistic appearance."],
+                ["DRILLED HOLES", "Small holes were drilled in selected areas to represent openings and water-flow points."],
+                ["LANDSCAPE", "Different raised and low areas were arranged to demonstrate how water can collect and move."]
+            ],
+
+            diagram: true
+        },
+
+
+        /* =================================================
+           B — ASSAM FLOOD + COAL MINING MODEL
+           ================================================= */
+
+        {
+            label: "STEP 02 • ASSAM + SECOND MODEL",
+            title: "ASSAM FLOOD & COAL MINING MODEL",
+
+            text:
+                "The second base model represents a flood-affected landscape and a coal-mining area. Assam is highly vulnerable to flooding during the monsoon because of intense rainfall, overflowing rivers and the presence of the Brahmaputra and its tributaries. The model was designed to visually connect the landscape, water flow and human activities that can be affected during flooding.",
+
+            materials: [
+                ["PLYWOOD BASE", "A separate plywood base was prepared for the second demonstration model."],
+                ["THERMOCOL", "Thermocol was used to create raised land, slopes and landscape features."],
+                ["ALUMINIUM FOIL", "Aluminium foil was shaped to create reflective surfaces and parts of the landscape."],
+                ["TISSUE", "Tissue was used to build and texture selected landscape structures."],
+                ["COAL", "Real coal pieces were placed in the mining section to make the demonstration more realistic."],
+                ["WATER", "Water was added to represent the river and floodwater moving through the model."],
+                ["BRIDGE", "A small bridge was added to make the landscape more realistic and show infrastructure crossing the water."]
+            ],
+
+            diagram: true
+        },
+
+
+        /* =================================================
+           C — EFFECTS
+           ================================================= */
+
+        {
+            label: "STEP 03 • FLOOD IMPACT",
+            title: "WHAT HAPPENS WHEN THE FLOOD ARRIVES",
+
+            text:
+                "When heavy rainfall continues, rivers and drainage channels can receive more water than they can carry. Water may rise above normal levels and spread over nearby land. In our model, the rising water represents the way floodwater can move into low-lying areas and affect people, infrastructure, agriculture, wildlife and other parts of the environment.",
+
+            impacts: [
+                "🏠 HOMES — Floodwater can enter houses and disrupt daily life.",
+                "🛣️ ROADS — Roads and transport routes can become difficult or impossible to use.",
+                "🌾 AGRICULTURE — Fields and crops may be damaged by prolonged flooding.",
+                "🐘 WILDLIFE — Animals can lose habitat and move towards safer areas.",
+                "🌉 BRIDGES — Bridges and other infrastructure can be affected by strong water flow.",
+                "⛏️ MINING — Flooding can disrupt mining areas and surrounding land."
+            ],
+
+            diagram: true
+        },
+
+
+        /* =================================================
+           D — PREVENTION
+           ================================================= */
+
+        {
+            label: "STEP 04 • SOLUTION",
+            title: "PREVENTION & PROTECTION",
+
+            text:
+                "The SHIELD model demonstrates that flood damage can be reduced through awareness, preparation and proper planning. Communities can use early-warning systems, maintain drainage channels, protect natural water bodies, avoid unsafe construction in flood-prone areas and prepare evacuation plans. The aim is not simply to stop water, but to reduce the danger it creates.",
+
+            prevention: [
+                "🌧️ MONITOR HEAVY RAINFALL",
+                "📢 USE EARLY WARNING SYSTEMS",
+                "🌊 KEEP DRAINAGE CHANNELS CLEAR",
+                "🌿 PROTECT NATURAL WATER BODIES",
+                "🏠 PLAN SAFE BUILDING AREAS",
+                "🚨 PREPARE EVACUATION ROUTES",
+                "🛟 KEEP EMERGENCY SUPPLIES READY",
+                "🛡️ SPREAD FLOOD AWARENESS"
+            ],
+
+            diagram: true
+        }
+
+    ];
+
+
+    /* =====================================================
+       CREATE CARD CONTENT
+       ===================================================== */
+
+    function createCardContent(index) {
+
+        const data = shieldSections[index];
+
+        const card = cards[index];
+
+        if (!card || !data) return;
+
+
+        let extraHTML = "";
+
+
+        /* MATERIALS */
+
+        if (data.materials) {
+
+            extraHTML += `
+                <div class="model-details">
+
+                    ${data.materials.map(function (item) {
+
+                        return `
+                            <div class="model-material">
+
+                                <strong>${item[0]}</strong>
+
+                                <span>
+                                    ${item[1]}
+                                </span>
+
+                            </div>
+                        `;
+
+                    }).join("")}
+
+                </div>
+            `;
+        }
+
+
+        /* IMPACTS */
+
+        if (data.impacts) {
+
+            extraHTML += `
+                <div class="impact-list">
+
+                    ${data.impacts.map(function (item) {
+
+                        return `
+                            <span>${item}</span>
+                        `;
+
+                    }).join("")}
+
+                </div>
+            `;
+        }
+
+
+        /* PREVENTION */
+
+        if (data.prevention) {
+
+            extraHTML += `
+                <div class="prevention-list">
+
+                    ${data.prevention.map(function (item) {
+
+                        return `
+                            <span>${item}</span>
+                        `;
+
+                    }).join("")}
+
+                </div>
+            `;
+        }
+
+
+        /* DIAGRAM */
+
+        if (data.diagram) {
+
+            extraHTML += `
+
+                <div class="flood-model-diagram">
+
+                    <div class="diagram-title">
+                        FLOOD FORMATION • MODEL DIAGRAM
+                    </div>
+
+                    <div class="diagram-mountain"></div>
+
+                    <div class="diagram-mountain two"></div>
+
+                    <div class="diagram-river"></div>
+
+                    <div class="diagram-point"></div>
+
+                    <div class="diagram-flood"></div>
+
+                </div>
+
+            `;
+        }
+
+
+        card.innerHTML = `
+
+            <div class="card-number">
+                ${String.fromCharCode(65 + index)}
+            </div>
+
+            <div>
+
+                <span class="card-label">
+                    ${data.label}
+                </span>
+
+                <h3>
+                    ${data.title}
+                </h3>
+
+                <p>
+                    ${data.text}
+                </p>
+
+                ${extraHTML}
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       LOAD ALL CONTENT
+       ===================================================== */
+
+    shieldSections.forEach(function (_, index) {
+        createCardContent(index);
+    });
+
+
+    /* =====================================================
+       A B C D SWITCHING
+       ===================================================== */
+
+    function activateStep(index) {
+
+        if (index < 0 || index >= steps.length) return;
+
+
+        /* remove active */
+
+        steps.forEach(function (step) {
+            step.classList.remove("active");
+        });
+
+
+        /* activate selected */
+
+        steps[index].classList.add("active");
+
+
+        /* animate selected card */
+
+        cards.forEach(function (card, cardIndex) {
+
+            card.classList.remove("shield-card-active");
+
+            if (cardIndex === index) {
+
+                /*
+                 * Small timeout allows the animation
+                 * to restart every time.
+                 */
+
+                void card.offsetWidth;
+
+                card.classList.add("shield-card-active");
+            }
+
+        });
+
+
+        /* scroll selected card into view on mobile */
+
+        if (window.innerWidth <= 700) {
+
+            setTimeout(function () {
+
+                cards[index].scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            }, 150);
+
+        }
+
+    }
+
+
+    /* =====================================================
+       CLICK A B C D
+       ===================================================== */
+
+    steps.forEach(function (step, index) {
+
+        step.setAttribute("role", "button");
+        step.setAttribute("tabindex", "0");
+
+        step.addEventListener("click", function () {
+
+            activateStep(index);
+
+        });
+
+
+        /* keyboard support */
+
+        step.addEventListener("keydown", function (event) {
+
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
+
+                event.preventDefault();
+
+                activateStep(index);
+
+            }
+
+        });
+
+    });
+
+
+    /* =====================================================
+       START WITH A
+       ===================================================== */
+
+    activateStep(0);
+
+
+    /* =====================================================
+       LITTLE GLOW EFFECT WHEN GUIDE OPENS
+       ===================================================== */
+
+    const guideButton = document.getElementById("guideButton");
+
+    if (guideButton) {
+
+        guideButton.addEventListener("click", function () {
+
+            setTimeout(function () {
+
+                activateStep(0);
+
+            }, 100);
+
+        });
+
+    }
+
+});
