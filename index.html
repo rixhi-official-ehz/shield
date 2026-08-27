@@ -1351,6 +1351,39 @@
 
     <script src="script.js"></script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const button = document.querySelector("button");
+
+    if (!button) return;
+
+    button.addEventListener("click", function () {
+
+        const pdfs = [
+            "PDFs/001%20NAGALAND.PDF",
+            "PDFs/002%20SIVASAGAR.PDF",
+            "PDFs/003%20SHIELD.PDF"
+        ];
+
+        pdfs.forEach(function (pdf, index) {
+
+            setTimeout(function () {
+                const link = document.createElement("a");
+                link.href = pdf;
+                link.download = decodeURIComponent(pdf.split("/").pop());
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            }, index * 1500);
+
+        });
+
+    });
+
+});
+</script>
+
 
 </body>
 
