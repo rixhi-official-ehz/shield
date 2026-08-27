@@ -1354,32 +1354,127 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    const button = document.querySelector("button");
+    const editionButton = document.getElementById("snEdition");
+    const nameInput = document.getElementById("snName");
+    const status = document.getElementById("snStatus");
 
-    if (!button) return;
+    if (!editionButton || !nameInput) return;
 
-    button.addEventListener("click", function () {
+    /*
+     * IMPORTANT
+     * The ZIP file must be in the SAME folder as index.html:
+     *
+     * index.html
+     * style.css
+     * intro.js
+     * script.js
+     * SHIELD-EDITION.zip
+     */
 
-        const pdfs = [
-            "PDFs/001%20NAGALAND.PDF",
-            "PDFs/002%20SIVASAGAR.PDF",
-            "PDFs/003%20SHIELD.PDF"
-        ];
+    const editionFile = "SHIELD-EDITION.zip";
 
-        pdfs.forEach(function (pdf, index) {
+    /* Enable button only after a name is entered */
+    function checkName() {
 
-            setTimeout(function () {
-                const link = document.createElement("a");
-                link.href = pdf;
-                link.download = decodeURIComponent(pdf.split("/").pop());
-                document.body.appendChild(link);
-                link.click();
-                link.remove();
-            }, index * 1500);
+        const name = nameInput.value.trim();
 
-        });
+        if (name.length > 0) {
+
+            editionButton.disabled = false;
+
+            if (status) {
+                status.textContent = "READY • CLICK GET THE EDITION";
+            }
+
+        } else {
+
+            editionButton.disabled = true;
+
+            if (status) {
+                status.textContent = "ENTER YOUR NAME TO CONTINUE";
+            }
+
+        }
+    }
+
+    nameInput.addEventListener("input", checkName);
+
+    nameInput.addEventListener("keydown", function (event) {
+
+        if (event.key === "Enter" && !editionButton.disabled) {
+            event.preventDefault();
+            editionButton.click();
+        }
 
     });
+
+
+    /*
+     * ONLY THIS BUTTON CAN START THE DOWNLOAD.
+     *
+     * Capture mode prevents any older download handler
+     * from accidentally downloading the PDFs.
+     */
+
+    editionButton.addEventListener("click", function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        if (!nameInput.value.trim()) {
+            nameInput.focus();
+
+            if (status) {
+                status.textContent = "PLEASE ENTER YOUR NAME FIRST";
+            }
+
+            return;
+        }
+
+        /* Prevent accidental double-click downloads */
+        if (editionButton.dataset.downloading === "true") {
+            return;
+        }
+
+        editionButton.dataset.downloading = "true";
+
+        const originalText = editionButton.innerHTML;
+
+        editionButton.innerHTML = `
+            <span>DOWNLOADING...</span>
+            <span class="sn-edition-arrow">↓</span>
+        `;
+
+        /*
+         * One single download:
+         * SHIELD-EDITION.zip
+         */
+
+        const downloadLink = document.createElement("a");
+
+        downloadLink.href = editionFile;
+        downloadLink.download = "SHIELD-EDITION.zip";
+        downloadLink.style.display = "none";
+
+        document.body.appendChild(downloadLink);
+
+        downloadLink.click();
+
+        setTimeout(function () {
+
+            downloadLink.remove();
+
+            editionButton.innerHTML = originalText;
+            editionButton.dataset.downloading = "false";
+
+        }, 1500);
+
+    }, true);
+
+
+    /* Initial state */
+    checkName();
 
 });
 </script>
